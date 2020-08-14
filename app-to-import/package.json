@@ -1,0 +1,47 @@
+{
+  "name": "app-to-import",
+  "version": "0.1.0",
+  "private": true,
+  "main": "build/static/js/main.js",
+  "types": "types/main.d.ts",
+  "module": "build/static/js/main.js",
+  "files": [
+    "*"
+  ],
+  "dependencies": {
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "scripts": {
+    "clean": "rimraf build",
+    "start": "react-scripts start",
+    "build": "npm run clean && react-scripts build",
+    "build:jupyter": "tsc -p tsconfig.jupyter.json",
+    "build:craco": "npm run clean && craco build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^5.6.4",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.9.7"
+  }
+}
