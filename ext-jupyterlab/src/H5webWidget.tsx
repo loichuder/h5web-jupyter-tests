@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactWidget } from "@jupyterlab/apputils";
-import { ColorWidget } from "app-to-import";
+import ColorWidget from "./components/ColorWidget";
 
 class H5webWidget extends ReactWidget {
   constructor() {
