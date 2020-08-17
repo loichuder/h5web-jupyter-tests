@@ -1,5 +1,5 @@
 {
-  "name": "h5web-jupyter",
+  "name": "ext-jupyterlab",
   "version": "0.1.0",
   "description": "A JupyterLab extension.",
   "keywords": [
