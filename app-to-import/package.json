@@ -10,6 +10,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
+    "build:tsc": "tsc -p tsconfig.build.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
