@@ -31,3 +31,7 @@ This folder contains the JupyterLab extension that will import and allow to use 
 ### The test App: `test-app`
 
 This is a React App to test the import into a "normal" React context (rather than JupyterLab).
+
+## Tests, problems and fixes
+
+See the file [HISTORY.md](./HISTORY.md) for the history of the tests, problems encountered and associated fixes for each branch.
