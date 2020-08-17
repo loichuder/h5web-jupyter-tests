@@ -2,6 +2,7 @@ module.exports = {
   webpack: {
     configure: {
       optimization: {
+        minimize: false,
         // Disable code splitting: https://github.com/facebook/create-react-app/issues/5306#issuecomment-431431877
         runtimeChunk: false,
         splitChunks: {
