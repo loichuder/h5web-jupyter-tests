@@ -1,10 +1,9 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import stuff from "app-to-import";
+import { ColorWidget } from "app-to-import";
 
 function App() {
-  console.log(stuff);
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <ColorWidget />
     </div>
   );
 }
