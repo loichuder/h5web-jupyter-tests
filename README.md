@@ -1,55 +1,33 @@
 # h5web-jupyter
 
-![Github Actions Status](https://github.com/my_name/myextension/workflows/Build/badge.svg)
+A repo to try integrating components from an external React App into a JupyterLab extension.
 
-A JupyterLab extension.
+## Description
 
+**My goal is to use components from a React App into JupyterLab.** This repo documents the tests towards this goal.
 
-## Requirements
+More technically speaking, I strive to export the components of the React App (created with Create React App) and import them into a JupyterLab extension.
 
-* JupyterLab >= 1.0
+This should work with components written in TypeScript and using CSS modules.
 
-## Install
+## Files
 
-```bash
-jupyter labextension install h5web-jupyter
-```
+### The React App to import `app-to-import`
 
-## Contributing
+This folder contains the React App with the component I wish to export (and reuse in JupyterLab): `ColorWidget`.
 
-### Install
+- `ColorWidget` renders a simple `div` whose color is set by a CSS module `ColorWidget.module.css`.
+- `App` is irrelevant to me as I only wish to export `ColorWidget`.
+- The app was set up using Create React App and written in TypeScript.
 
-The `jlpm` command is JupyterLab's pinned version of
-[yarn](https://yarnpkg.com/) that is installed with JupyterLab. You may use
-`yarn` or `npm` in lieu of `jlpm` below.
+### The JupyterLab extension `ext-jupyterlab`
 
-```bash
-# Clone the repo to your local environment
-# Move to h5web-jupyter directory
-# Install dependencies
-jlpm
-# Build Typescript source
-jlpm build
-# Link your development version of the extension with JupyterLab
-jupyter labextension link .
-# Rebuild Typescript source after making changes
-jlpm build
-# Rebuild JupyterLab after making any changes
-jupyter lab build
-```
+This folder contains the JupyterLab extension that will import and allow to use the component `ColorWidget` into JupyterLab.
 
-You can watch the source directory and run JupyterLab in watch mode to watch for changes in the extension's source and automatically rebuild the extension and application.
+- It is more or less the [Jupyterlab example of the display of a react-widget](https://github.com/jupyterlab/extension-examples/tree/master/react/react-widget): it wraps `ColorWidget` into JupyterLab's `ReactWidget` and adds a button to trigger its display.
+- It was set up using [Jupyterlab's cookiecutter](https://github.com/jupyterlab/extension-cookiecutter-ts).
+- The version of JupyterLab and of other Python packages are in `requirements.txt` located in the root of the project.
 
-```bash
-# Watch the source directory in another terminal tab
-jlpm watch
-# Run jupyterlab in watch mode in one terminal tab
-jupyter lab --watch
-```
+### The test App: `test-app`
 
-### Uninstall
-
-```bash
-jupyter labextension uninstall h5web-jupyter
-```
-
+This is a React App to test the import into a "normal" React context (rather than JupyterLab).
