@@ -2,6 +2,8 @@
   "name": "app-to-import",
   "version": "0.1.0",
   "private": true,
+  "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "dependencies": {
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",

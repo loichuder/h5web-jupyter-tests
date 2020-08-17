@@ -58,3 +58,15 @@ ModuleNotFoundError: Module not found: Error: Can't resolve './components/ColorW
 because it searches inside the internal libs of `jupyterlab` rather than resolving the symlink.
 
 - There is `jupyter labextension link .` (https://discourse.jupyter.org/t/about-jupyter-labextension-link-v-s-install/2201) that appears to do the symlink at JupyterLab's level (as does `npm link` for `npm`) which might be worth a try.
+
+## Using JupyterLab link (for ext-jupyterlab)
+
+- Again, I run `npm run build:tsc` in `app-to-import` and copy the CSS module file in the resulting folder.
+- I run `jupyter labextension link .` **and** `npm link .` into `app-to-import` (note that I tweaked `package.json` to have something closer of a "true" package).
+- In `ext-jupyterlab`, I add `app-to-import` by running `npm link app-to-import` and run `jlpm build`.
+
+I then run `jupyter labextension install .`: it works ! The extension is installed !
+
+I run `jupyter lab` to try to launch my _React Widget_: clicking on `React Widget` indeed displays the `div` of `ColorWidget` but missing the color. By inspecting with Developer tools, I see that the CSS module is present but there is no `class` on the `div`: there is an issue with the compilation/transpiling of the CSS module...
+
+- Perhaps I could use `webpack` to compile `app-to-import` CSS modules beforehand into regular CSS...
