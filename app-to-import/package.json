@@ -12,6 +12,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
+    "build:webpack": "webpack --config webpack.config.js",
     "build:tsc": "tsc -p tsconfig.build.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -34,6 +35,9 @@
     ]
   },
   "devDependencies": {
-    "typescript": "^3.9.7"
+    "awesome-typescript-loader": "^5.2.1",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }

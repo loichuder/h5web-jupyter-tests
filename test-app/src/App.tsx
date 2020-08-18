@@ -1,5 +1,5 @@
 import React from "react";
-import ColorWidget from "./components/ColorWidget";
+import { ColorWidget } from "app-to-import";
 
 function App() {
   return (
