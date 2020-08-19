@@ -84,3 +84,7 @@ I run `jupyter lab` to try to launch my _React Widget_: **the click on `React Wi
 To conclude, I am now able to import a simple React component (written in TS) with its associated CSS module into a Jupyter extension !
 
 Issue though: I cannot run `react-scripts start` anymore into `app-to-import`. It complains that I installed another `webpack` version that is incompatible with Create React App. I need to fix this as I wish that it is still possible to develop separately the App to import.
+
+### Fixing `react-scripts start` in `app-to-import`
+
+Well, that was easier than I thought: I only needed to remove `webpack` from the `devDependencies`. `webpack-cli` probably resolves to the `webpack` module used by `react-scripts`.
