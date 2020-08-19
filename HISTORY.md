@@ -70,3 +70,17 @@ I then run `jupyter labextension install .`: it works ! The extension is install
 I run `jupyter lab` to try to launch my _React Widget_: clicking on `React Widget` indeed displays the `div` of `ColorWidget` but missing the color. By inspecting with Developer tools, I see that the CSS module is present but there is no `class` on the `div`: there is an issue with the compilation/transpiling of the CSS module...
 
 - Perhaps I could use `webpack` to compile `app-to-import` CSS modules beforehand into regular CSS...
+
+## Using JupyterLab link **and** webpack
+
+- This time in `app-to-import`, I run `npm run build:webpack` as I added a minimal working `webpack` config for TS and CSS module files.
+- I run `jupyter labextension link .` **and** `npm link .` into `app-to-import` (if needed).
+- In `ext-jupyterlab`, I add `app-to-import` by running `npm link app-to-import` (if needed) and run `jlpm build`.
+
+I then run `jupyter labextension install .`: it works ! The extension is installed again !
+
+I run `jupyter lab` to try to launch my _React Widget_: **the click on `React Widget` displays this time the `ColorWidget` with the color set from the CSS module 🎉 !**
+
+To conclude, I am now able to import a simple React component (written in TS) with its associated CSS module into a Jupyter extension !
+
+Issue though: I cannot run `react-scripts start` anymore into `app-to-import`. It complains that I installed another `webpack` version that is incompatible with Create React App. I need to fix this as I wish that it is still possible to develop separately the App to import.
