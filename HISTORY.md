@@ -14,3 +14,30 @@ I derived the steps of my latest attempt in https://github.com/loichuder/h5web-j
 - Finally, I run `npm link h5web` in the `test-app`.
 
 :tada: I am able to import and display the `ColorWidget` when running `test-app` !
+
+## Import a simple widget in the jupyterLab extension
+
+Should be straightforward, right ? I just need to run `jupyter labextension link .` in the `h5web` folder first to add it to the list of packages JupyterLab uses when building extension packages.
+
+I then run `jlpm build` in `ext-jupyterlab`: **I get 177 errors** :neutral_face:
+
+All of them are conflicting `react` property declarations between the ones of `ext-jupyterlab` and `h5web` of the type:
+
+```
+../../h5web/node_modules/@types/react/index.d.ts:3148:13 - error TS2717: Subsequent property declarations must have the same type.  Property 'symbol' must be of type 'SVGProps<SVGSymbolElement>', but here has type 'SVGProps<SVGSymbolElement>'.
+
+3148             symbol: React.SVGProps<SVGSymbolElement>;
+                 ~~~~~~
+
+  node_modules/@types/react/index.d.ts:3138:13
+    3138             symbol: React.SVGProps<SVGSymbolElement>;
+                     ~~~~~~
+    'symbol' was also declared here.
+```
+
+Note that I did not get this error when importing from `app-to-import` in https://github.com/loichuder/h5web-jupyter/tree/symbolic-link. Investigating the `@types/react` packages, I see that they have different versions:
+
+- `^16.9.35` in `h5web`
+- `^16.9.46` in `app-to-import`
+
+The latter is surely in sync with the version used by the JupyterLab package `@jupyterlab/launcher`, that is a dependency of `ext-jupyterlab` (In fact, `@jupyterlab/launcher` uses `"@types/react": "~16.9.16"` but well...).
