@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactWidget } from "@jupyterlab/apputils";
-import { ColorWidget } from "h5web";
+import MyReactComponent from "./MyReactComponent";
 
 class H5webWidget extends ReactWidget {
   constructor() {
@@ -9,7 +9,7 @@ class H5webWidget extends ReactWidget {
   }
 
   render(): JSX.Element {
-    return <ColorWidget />;
+    return <MyReactComponent />;
   }
 }
 

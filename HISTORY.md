@@ -15,7 +15,7 @@ I derived the steps of my latest attempt in https://github.com/loichuder/h5web-j
 
 :tada: I am able to import and display the `ColorWidget` when running `test-app` !
 
-## Import a simple widget in the jupyterLab extension
+## Import a simple widget in the JupyterLab extension
 
 Should be straightforward, right ? I just need to run `jupyter labextension link .` in the `h5web` folder first to add it to the list of packages JupyterLab uses when building extension packages.
 
@@ -40,7 +40,7 @@ Note that I did not get this error when importing from `app-to-import` in https:
 - `^16.9.35` in `h5web`
 - `^16.9.46` in `app-to-import`
 
-The latter is surely in sync with the version used by the JupyterLab package `@jupyterlab/launcher`, that is a dependency of `ext-jupyterlab` (In fact, `@jupyterlab/launcher` uses `"@types/react": "~16.9.16"` but well...).
+The latter is surely in sync with the version used by the JupyterLab package `@jupyterlab/launcher`, that is a dependency of `ext-jupyterlab` (In fact, the version 2.1 of `@jupyterlab/launcher` uses `"@types/react": "~16.9.16"` but well...).
 
 ### Matching @types/react in h5web to the version needed by @jupyterlab/launcher
 
@@ -50,3 +50,13 @@ The latter is surely in sync with the version used by the JupyterLab package `@j
 **`jupyter labextension install .` runs smoothly as well and the `ColorWidget` is displayed when clicking on `React Widget` in JupyterLab !**
 
 I should look into things like `peerDependencies` to avoid matching the version by hand but for now, it will do.
+
+## Import components from h5web in the JupyterLab extension
+
+I will try now to import a simple component `ToggleBtn`. Better go slowly and safely...
+
+- I change the `main.ts` in `h5web` to export `ToggleBtn` and run `npm run build:webpack` again
+- In `ext-jupyterlab`, I then import `ToggleBtn` in a new component `MyReactComponent` that is rendered by `H5webWidget`
+- I run `jlpm build` and `jupyter labextension install .`: it works !
+
+:tada: **My ToggleBtn is displayed and works as expected !** The only problem is that its aspect is very different from one it has in `h5web`. I guess that the root CSS files in `src/styles` are not imported. I can probably fix this by changing the webpack config in `h5web`.
