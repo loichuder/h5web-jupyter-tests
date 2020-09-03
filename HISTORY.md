@@ -41,3 +41,12 @@ Note that I did not get this error when importing from `app-to-import` in https:
 - `^16.9.46` in `app-to-import`
 
 The latter is surely in sync with the version used by the JupyterLab package `@jupyterlab/launcher`, that is a dependency of `ext-jupyterlab` (In fact, `@jupyterlab/launcher` uses `"@types/react": "~16.9.16"` but well...).
+
+### Matching @types/react in h5web to the version needed by @jupyterlab/launcher
+
+- I run then `npm install --save-dev @types/react@16.9.46` in `h5web`. I get `^16.9.46` in the `package.json`
+- I run `jlpm build` again in `ext-jupyterlab`: it works ! :tada:
+
+**`jupyter labextension install .` runs smoothly as well and the `ColorWidget` is displayed when clicking on `React Widget` in JupyterLab !**
+
+I should look into things like `peerDependencies` to avoid matching the version by hand but for now, it will do.
