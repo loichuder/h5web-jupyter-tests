@@ -90,3 +90,13 @@ Uncaught Error: Invalid hook call. Hooks can only be called inside of the body o
 2. You might be breaking the Rules of Hooks
 3. You might have more than one copy of React in the same app
 ```
+
+### Fixing invalid hook call
+
+_Commit used for h5web: https://github.com/silx-kit/h5web/commit/bcb51f6610a27c8d139289bead50ed88cde123a3_
+
+I had to find [a message from 2019](https://gitter.im/jupyterlab/jupyterlab?at=5d43129941d5cd61b596efaa) on JupyterLab's gitter to know that I can solve the problem by putting `react` in `externals` in the webpack config of `h5web`. The problem `3. You might have more than one copy of React in the same app` is then solved (note this tactics may save me to match the version of `@types/react` by hand ).
+
+- Again, I run `npm run build:webpack` in `h5web` and `jlpm build && jupyter labextension install .` in `ext-jupyter-lab`: everything works.
+
+**In JupyterLab, the error is gone and the `DataCurve` is displayed !** :tada:.
