@@ -72,3 +72,21 @@ I will try now to import a simple component `ToggleBtn`. Better go slowly and sa
 _Commit used for h5web: https://github.com/silx-kit/h5web/commit/741ac72cbc5e83fe6968ed78c4e6e97d435f6785_
 
 I tried to add CSS files to the `entry` field of the webpack config of _h5web_ but to no avail. Instead, a working solution was to import the needed CSS files into `main.ts`, the entrypoint of _h5web_'s webpack.
+
+## Import more complex components from h5web in the JupyterLab extension
+
+_Commit used for h5web: https://github.com/silx-kit/h5web/commit/3070e1b1616eab29f663af9293ac0e3c35ceb030_
+
+I try now to import more complex components to have a simple line visualisation in JupyterLab. For that, I import `DataCurve` from `h5web` that also needs `VisCanvas` and `ScaleType` (changing the `main.ts` in `h5web`, running `npm run build:webpack`, etc.).
+
+- In `ext-jupyterlab`, I change `MyReactComponent` to render the `DataCurve` with a basic array.
+- I run `jlpm build` and `jupyter labextension install .`: it works !
+
+Now, in JupyterLab, the `DataCurve` is not displayed. Instead, I get `Invalid hook calls` errors in the console:
+
+```
+Uncaught Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+```
