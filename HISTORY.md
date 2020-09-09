@@ -4,6 +4,8 @@ I managed to [successfully import a React widget from a ReactApp into a JupyterL
 
 ## Import a simple widget in the test-app
 
+_Commit used for h5web: https://github.com/silx-kit/h5web/commit/5de44f313a1ded0abe8964d7ff7d0c343e9b6dd2_
+
 I start slowly by trying to import the simple `ColorWidget` I made in https://github.com/loichuder/h5web-jupyter/tree/symbolic-link in the React app test-app. But this time, `ColorWidget` is declared in **h5web**: https://github.com/silx-kit/h5web/tree/import-jupyter-ext.
 
 I derived the steps of my latest attempt in https://github.com/loichuder/h5web-jupyter/tree/symbolic-link:
@@ -44,6 +46,8 @@ The latter is surely in sync with the version used by the JupyterLab package `@j
 
 ### Matching @types/react in h5web to the version needed by @jupyterlab/launcher
 
+_Commit used for h5web: https://github.com/silx-kit/h5web/commit/29358f2b4e53907a864186fb272cf95df8cce046_
+
 - I run then `npm install --save-dev @types/react@16.9.46` in `h5web`. I get `^16.9.46` in the `package.json`
 - I run `jlpm build` again in `ext-jupyterlab`: it works ! :tada:
 
@@ -53,6 +57,8 @@ I should look into things like `peerDependencies` to avoid matching the version 
 
 ## Import components from h5web in the JupyterLab extension
 
+_Commit used for h5web: https://github.com/silx-kit/h5web/commit/958af28733c97908eab250510b8b6aeb3e0ffba7_
+
 I will try now to import a simple component `ToggleBtn`. Better go slowly and safely...
 
 - I change the `main.ts` in `h5web` to export `ToggleBtn` and run `npm run build:webpack` again
@@ -60,3 +66,9 @@ I will try now to import a simple component `ToggleBtn`. Better go slowly and sa
 - I run `jlpm build` and `jupyter labextension install .`: it works !
 
 :tada: **My ToggleBtn is displayed and works as expected !** The only problem is that its aspect is very different from one it has in `h5web`. I guess that the root CSS files in `src/styles` are not imported. I can probably fix this by changing the webpack config in `h5web`.
+
+### Importing CSS from h5web
+
+_Commit used for h5web: https://github.com/silx-kit/h5web/commit/741ac72cbc5e83fe6968ed78c4e6e97d435f6785_
+
+I tried to add CSS files to the `entry` field of the webpack config of _h5web_ but to no avail. Instead, a working solution was to import the needed CSS files into `main.ts`, the entrypoint of _h5web_'s webpack.
