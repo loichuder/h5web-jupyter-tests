@@ -115,3 +115,7 @@ A few issues though:
 
 - Heatmap is loading forever and not displaying anything. Most likely an issue with the web worker in `h5web`.
 - The styling is a bit off: buttons still have borders and the layout for the main window is horizontal instead of vertical. This is a common issue with components that have regular (and not module CSS) CSS classes (in this case `btn-clean` and `reflex-vertical`). I have to tune the webpack config to export correctly all CSS from `h5web`.
+
+### Importing CSS styles properly
+
+- I changed the webpack config for CSS files according to [this link](https://blog.jakoblind.no/css-modules-webpack/#using-both-css-modules-and-global-css-at-the-same-time). Then, the regular CSS gets properly imported but is no longer overwritten by CSS modules as everything is inlined by the `style-loader`...

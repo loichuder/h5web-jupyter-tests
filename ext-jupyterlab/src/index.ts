@@ -25,8 +25,9 @@ const extension: JupyterFrontEndPlugin<void> = {
 
     const command = CommandIDs.create;
     commands.addCommand(command, {
-      caption: "Create a new React Widget",
-      label: "React Widget",
+      caption: "Launch an instance of h5web",
+      label: "H5web",
+      icon: null,
       execute: () => {
         const content = new H5webWidget();
         const widget = new MainAreaWidget<H5webWidget>({ content });
