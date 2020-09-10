@@ -100,3 +100,18 @@ I had to find [a message from 2019](https://gitter.im/jupyterlab/jupyterlab?at=5
 - Again, I run `npm run build:webpack` in `h5web` and `jlpm build && jupyter labextension install .` in `ext-jupyter-lab`: everything works.
 
 **In JupyterLab, the error is gone and the `DataCurve` is displayed !** :tada:.
+
+## Importing the whole App of h5web in the Jupyterlab extension
+
+_Commit used for h5web: https://github.com/silx-kit/h5web/commit/ba2236960776e51f5bd11740fb19b5fd1007f155_
+
+- In `h5web`, I export `App` and `SilxProvider` to provide the data (I tried to export `DemoApp` directly but nothing was renderered into Jupyter, probably due to incompatibilities by React Router). Again, `npm run build:webpack`.
+- In `ext-jupyterlab`, I change `MyReactComponent` to render the `App` wrapped by `SilxProvider`.
+- I run `jlpm build` and `jupyter labextension install .`: it works !
+
+**In JupyterLab, `h5web` appears ! I can navigate and display/inspect the HDF file !** :tada:
+
+A few issues though:
+
+- Heatmap is loading forever and not displaying anything. Most likely an issue with the web worker in `h5web`.
+- The styling is a bit off: buttons still have borders and the layout for the main window is horizontal instead of vertical. This is a common issue with components that have regular (and not module CSS) CSS classes (in this case `btn-clean` and `reflex-vertical`). I have to tune the webpack config to export correctly all CSS from `h5web`.
