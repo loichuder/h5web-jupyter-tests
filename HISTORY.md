@@ -4,8 +4,6 @@ I managed to [successfully import a React widget from a ReactApp into a JupyterL
 
 ## Import a simple widget in the test-app
 
-_Commit used for h5web: https://github.com/silx-kit/h5web/commit/5de44f313a1ded0abe8964d7ff7d0c343e9b6dd2_
-
 I start slowly by trying to import the simple `ColorWidget` I made in https://github.com/loichuder/h5web-jupyter/tree/symbolic-link in the React app test-app. But this time, `ColorWidget` is declared in **h5web**: https://github.com/silx-kit/h5web/tree/import-jupyter-ext.
 
 I derived the steps of my latest attempt in https://github.com/loichuder/h5web-jupyter/tree/symbolic-link:
@@ -46,8 +44,6 @@ The latter is surely in sync with the version used by the JupyterLab package `@j
 
 ### Matching @types/react in h5web to the version needed by @jupyterlab/launcher
 
-_Commit used for h5web: https://github.com/silx-kit/h5web/commit/29358f2b4e53907a864186fb272cf95df8cce046_
-
 - I run then `npm install --save-dev @types/react@16.9.46` in `h5web`. I get `^16.9.46` in the `package.json`
 - I run `jlpm build` again in `ext-jupyterlab`: it works ! :tada:
 
@@ -56,8 +52,6 @@ _Commit used for h5web: https://github.com/silx-kit/h5web/commit/29358f2b4e53907
 I should look into things like `peerDependencies` to avoid matching the version by hand but for now, it will do.
 
 ## Import components from h5web in the JupyterLab extension
-
-_Commit used for h5web: https://github.com/silx-kit/h5web/commit/958af28733c97908eab250510b8b6aeb3e0ffba7_
 
 I will try now to import a simple component `ToggleBtn`. Better go slowly and safely...
 
@@ -69,13 +63,9 @@ I will try now to import a simple component `ToggleBtn`. Better go slowly and sa
 
 ### Importing CSS from h5web
 
-_Commit used for h5web: https://github.com/silx-kit/h5web/commit/741ac72cbc5e83fe6968ed78c4e6e97d435f6785_
-
 I tried to add CSS files to the `entry` field of the webpack config of _h5web_ but to no avail. Instead, a working solution was to import the needed CSS files into `main.ts`, the entrypoint of _h5web_'s webpack.
 
 ## Import more complex components from h5web in the JupyterLab extension
-
-_Commit used for h5web: https://github.com/silx-kit/h5web/commit/3070e1b1616eab29f663af9293ac0e3c35ceb030_
 
 I try now to import more complex components to have a simple line visualisation in JupyterLab. For that, I import `DataCurve` from `h5web` that also needs `VisCanvas` and `ScaleType` (changing the `main.ts` in `h5web`, running `npm run build:webpack`, etc.).
 
@@ -93,8 +83,6 @@ Uncaught Error: Invalid hook call. Hooks can only be called inside of the body o
 
 ### Fixing invalid hook call
 
-_Commit used for h5web: https://github.com/silx-kit/h5web/commit/bcb51f6610a27c8d139289bead50ed88cde123a3_
-
 I had to find [a message from 2019](https://gitter.im/jupyterlab/jupyterlab?at=5d43129941d5cd61b596efaa) on JupyterLab's gitter to know that I can solve the problem by putting `react` in `externals` in the webpack config of `h5web`. The problem `3. You might have more than one copy of React in the same app` is then solved (note this tactics may save me to match the version of `@types/react` by hand ).
 
 - Again, I run `npm run build:webpack` in `h5web` and `jlpm build && jupyter labextension install .` in `ext-jupyter-lab`: everything works.
@@ -102,8 +90,6 @@ I had to find [a message from 2019](https://gitter.im/jupyterlab/jupyterlab?at=5
 **In JupyterLab, the error is gone and the `DataCurve` is displayed !** :tada:.
 
 ## Importing the whole App of h5web in the Jupyterlab extension
-
-_Commit used for h5web: https://github.com/silx-kit/h5web/commit/ba2236960776e51f5bd11740fb19b5fd1007f155_
 
 - In `h5web`, I export `App` and `SilxProvider` to provide the data (I tried to export `DemoApp` directly but nothing was renderered into Jupyter, probably due to incompatibilities by React Router). Again, `npm run build:webpack`.
 - In `ext-jupyterlab`, I change `MyReactComponent` to render the `App` wrapped by `SilxProvider`.
