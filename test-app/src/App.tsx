@@ -1,12 +1,15 @@
 import React from "react";
-import { ColorWidget } from "h5web";
+import { App, ColorWidget, SilxProvider } from "h5web";
 
-function App() {
+function MyApp() {
+  console.log(ColorWidget);
   return (
     <div className="App">
-      <ColorWidget />
+      <SilxProvider domain="bsa_002_000-integrate-sub">
+        <App />
+      </SilxProvider>
     </div>
   );
 }
 
-export default App;
+export default MyApp;
