@@ -105,3 +105,11 @@ A few issues though:
 ### Importing CSS styles properly
 
 - I changed the webpack config for CSS files according to [this link](https://blog.jakoblind.no/css-modules-webpack/#using-both-css-modules-and-global-css-at-the-same-time). Then, the regular CSS gets properly imported but is no longer overwritten by CSS modules as everything is inlined by the `style-loader`...
+
+## The return of the invalid hook call
+
+When importing `h5web` in the test-app (not in the Jupyter ext), I had again the **Invalid hook call** error even when putting `react` and `react-dom` in `externals` of webpack in `h5web`.
+
+This is visibly a bug with [npm link](https://github.com/facebook/react/issues/13991) that should not arise when fetching the package from `npm`. Indeed with `npm link`, we have a symlink in `node_modules` of the React app `test-app` to the repository of `h5web`. Apparently, CRA resolves the modules of `lib.js` in this repo first.
+
+To override this behaviour, we override CRA webpack rules in the `test-app` using `customize-cra` and `react-app-rewired` to link `react` to the `node_module/react` of the `test-app` folder.
