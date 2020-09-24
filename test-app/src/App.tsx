@@ -1,5 +1,5 @@
 import React from "react";
-import { App, SilxProvider } from "h5web";
+import { App, SilxProvider } from "@h5web/app";
 
 function MyApp() {
   return (
